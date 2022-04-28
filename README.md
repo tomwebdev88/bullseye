@@ -2,9 +2,11 @@
 
 A new Flutter project.
 
-## Getting Started
+## Bullseye Game
 
 This project is a starting point for a Flutter application.
+
+I created this app from Ray Wenderlich Flutter App: An App From Scratch.
 
 A few resources to get you started if this is your first Flutter project:
 
