@@ -39,7 +39,7 @@ class _GamePageState extends State<GamePage> {
   @override
   void initState() {
     super.initState();
-    _model = GameModel(Random().nextInt(100) + 1);
+    _model = GameModel(_newTargetValue());
   }
 
   @override
@@ -66,6 +66,7 @@ class _GamePageState extends State<GamePage> {
             Score(
               totalScore: _model.totalScore,
               round: _model.round,
+              onStartOver: _startNewGame,
             )
           ],
         ),
@@ -74,9 +75,15 @@ class _GamePageState extends State<GamePage> {
   }
 
   int _pointsForCurrentRound() {
-    const maximumScore = 100;
+    var bonus = 0;
+    var maximumScore = 100;
     var difference = _differenceAmount();
-    return maximumScore - difference;
+    if (difference == 0) {
+      bonus += 100;
+    } else if (difference == 1) {
+      bonus += 50;
+    }
+    return maximumScore - difference + bonus;
   }
 
   String _alertTitle() {
@@ -96,6 +103,17 @@ class _GamePageState extends State<GamePage> {
 
   int _differenceAmount() => (_model.target - _model.current).abs();
 
+  int _newTargetValue() => Random().nextInt(100) + 1;
+
+  void _startNewGame() {
+    setState(() {
+      _model.totalScore = GameModel.scoreStart;
+      _model.round = GameModel.roundStart;
+      _model.current = GameModel.sliderStart;
+      _model.target = _newTargetValue();
+    });
+  }
+
   void _showAlert(BuildContext context) {
     var okButton = TextButton(
       child: const Text('Awesome!'),
@@ -104,7 +122,7 @@ class _GamePageState extends State<GamePage> {
         setState(
           () {
             _model.totalScore += _pointsForCurrentRound();
-            _model.target = Random().nextInt(100) + 1;
+            _model.target = _newTargetValue();
             _model.round++;
           },
         );
