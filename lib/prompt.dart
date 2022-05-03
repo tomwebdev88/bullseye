@@ -18,6 +18,7 @@ class Prompt extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Text(
             '$targetValue',
+            style: TargetTextStyle.bodyText1(context),
           ),
         )
       ],
