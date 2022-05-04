@@ -5,6 +5,8 @@ import 'prompt.dart';
 import 'control.dart';
 import 'score.dart';
 import 'game_model.dart';
+import 'hit_me_button.dart';
+import 'style_button.dart';
 
 void main() {
   runApp(const BullsEyeApp());
@@ -59,24 +61,30 @@ class _GamePageState extends State<GamePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Prompt(
-                targetValue: _model.target,
+              Padding(
+                padding: const EdgeInsets.only(top: 48.0, bottom: 32.0),
+                child: Prompt(
+                  targetValue: _model.target,
+                ),
               ),
               Control(
                 model: _model,
               ),
-              TextButton(
-                  child: const Text(
-                    'Hit Me!',
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                  onPressed: () {
-                    _showAlert(context);
-                  }),
-              Score(
-                totalScore: _model.totalScore,
-                round: _model.round,
-                onStartOver: _startNewGame,
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: HitMeButton(
+                    text: 'HIT ME',
+                    onPressed: () {
+                      _showAlert(context);
+                    }),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Score(
+                  totalScore: _model.totalScore,
+                  round: _model.round,
+                  onStartOver: _startNewGame,
+                ),
               )
             ],
           ),
@@ -126,8 +134,8 @@ class _GamePageState extends State<GamePage> {
   }
 
   void _showAlert(BuildContext context) {
-    var okButton = TextButton(
-      child: const Text('Awesome!'),
+    var okButton = StyledButton(
+      icon: Icons.close,
       onPressed: () {
         Navigator.of(context).pop();
         setState(
