@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class GameModel {
   GameModel(this.target,
       [this.current = sliderStart,

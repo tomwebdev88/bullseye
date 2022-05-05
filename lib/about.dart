@@ -15,9 +15,9 @@ class AboutPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: const Text(
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
                 '🎉 Bullseye 🎉',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
